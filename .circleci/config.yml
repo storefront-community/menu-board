@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm run test:e2e:ci
+      - run: npm run lint
   deploy:
     docker:
       - image: circleci/node:latest
@@ -14,11 +14,12 @@ jobs:
       - checkout
       - run: npm install
       - run: npm run build
-      - run: git checkout gh-pages
+      - run: git checkout --orphan gh-pages
+      - run: ls -A | grep -v ".git\|dist" | xargs rm -rf
       - run: cp -r dist/* .
       - run: git add .
       - run: git commit -m "Deploy $CIRCLE_TAG"
-      - run: git push origin gh-pages
+      - run: git push -f origin gh-pages
 workflows:
   version: 2.1
   build_and_deploy:
