@@ -1,10 +1,14 @@
 .menu-board {
   background-color: $black;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   position: relative;
   width: 100vw;
   height: 100vh;
   transition: background-color 0.5s ease;
+
+  @include flex-vertical-align();
 
   &.loading {
     background-color: $white;
