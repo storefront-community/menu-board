@@ -8,7 +8,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'menuBoard',
+      name: 'root',
       component: MenuBoard
     }
   ]
