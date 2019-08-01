@@ -1,0 +1,38 @@
+version : 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest-browsers
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+  deploy:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - run: git checkout --orphan gh-pages
+      - run: ls -A | grep -v ".git\|dist" | xargs rm -rf
+      - run: cp -r dist/* .
+      - run: git add .
+      - run: git commit -m "Deploy $CIRCLE_TAG"
+      - run: git push -f origin gh-pages
+workflows:
+  version: 2.1
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v\d\.\d\.\d/
+            branches:
+              ignore: /.*/
