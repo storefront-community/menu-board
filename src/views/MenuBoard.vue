@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-board" :class="{ 'loading': loading }" @click="exitMenuBoard">
+  <div class="menu-board" :class="{ 'loading': loading }">
     <Loader v-if="loading"/>
     <div v-else>
       <MenuBoardHeader/>
@@ -56,10 +56,6 @@ export default {
     this.stop()
   },
   methods: {
-    exitMenuBoard() {
-      this.stop()
-      this.$router.push({ name: 'root' })
-    },
     pageLoaded(page) {
       page.loading = false
       this.loading = this.pages.map(p => p.loading).includes(true)
