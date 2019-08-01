@@ -4,6 +4,10 @@ Digital menu board with animated content.
 
 View the [live demo](https://menu.storefront.community/).
 
+## Status
+
+[![CircleCI](https://circleci.com/gh/storefront-community/menuboard.svg?style=shield)](https://circleci.com/gh/storefront-community/menuboard)
+
 ## Changelog
 
 Changes are documented in the [release notes](https://github.com/storefront-community/menuboard/releases).
